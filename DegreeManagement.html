@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Degree Management</title>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <link rel="stylesheet" href="/assets/dcode.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="short icon" href="/assets/favicon.ico">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/1a81673399.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+            authDomain: "s2guide.firebaseapp.com",
+            databaseURL: "https://s2guide.firebaseio.com",
+            projectId: "s2guide",
+            storageBucket: "s2guide.appspot.com",
+            messagingSenderId: "457852779269",
+            appId: "1:457852779269:web:7e27f12f4d807544"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="DegreeManagement.js"></script>
+    <script src="https://kit.fontawesome.com/1a81673399.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<!--Author
+Hasini_Anthony
+19829265-->
+<body onload="init();">
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout-icon"></div>
+
+        <h4 style="text-align: center">Degree Management</h4>
+
+    </header>
+    <div class="mdl-layout__drawer">
+        <div class="nav-bar">
+
+            <div class="admin">
+                <span class="material-icons" style="font-size: 400%">person_pin</span><br>ADMIN</br>
+            </div>
+            <a href="Dashboard.html" class="nav-bar-link">
+                <span class="material-icons">home</span>Home
+            </a>
+
+            <a href="" class="nav-bar-link">
+                <span class="material-icons">account_circle</span>Manage Students
+
+            </a>
+            <a href="quizOption1.html" class="nav-bar-link">
+                <span class="material-icons">account_circle</span>Quiz
+
+            </a>
+            <a href="DegreeManagement.html" class="nav-bar-link">
+                <span class="material-icons">school</span>Degree Management
+            </a>
+
+            <a href="add_notice.html" class="nav-bar-link">
+                <span class="material-icons">event_note</span>Notices
+            </a>
+            <a href="admin.html" class="nav-bar-link">
+                <span class="material-icons">notifications</span>Adverticements
+            </a>
+
+            <a href="#" class="nav-bar-link"onclick="logout();">
+
+                <span class="material-icons" >exit_to_app</span>Logout
+
+            </a>
+
+        </div>
+    </div>
+    <div class="container msg-db" id="local_table">
+        <h2>Degree and Foundation Course Management</h2><br>
+        <button class="btn btn-primary" onclick="load_form_add();">Add a new Degree/Foundation Course</button>
+
+        <h4>Local Degrees</h4>
+        <input type="hidden" id="selectedId" value="">
+        <table id="table_local" class="table table-hover">
+            <tr>
+                <td><b>Code</b></td>
+                <td><b>Degree Title</b></td>
+                <td><b>Faculty</b></td>
+            </tr>
+        </table>
+
+        <h4>Foreign Degrees</h4>
+        <input type="hidden" id="selectedFID" value="">
+        <table id="table_foreign" class="table table-hover">
+            <tr>
+                <td><b>Code</b></td>
+                <td><b>Degree Title</b></td>
+                <td><b>Faculty</b></td>
+                <td><b>University</b></td>
+            </tr>
+        </table>
+
+        <h4>Foundation Courses</h4>
+        <table id="table_foundation" class="table table-hover">
+            <tr>
+                <td><b>Code</b></td>
+                <td><b>Degree Title</b></td>
+                <td><b>Faculty</b></td>
+                <td><b>University</b></td>
+            </tr>
+        </table>
+
+
+    </div>
+
+    <div id="div_degree_single" class="container msg-db" style="display: none">
+        <label>Firebase ID</label>
+        <input type="text" value="" id="fid"><br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <p id="code_label">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p id="code_title">
+            </div >
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p id="code_faculty"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <p id="code_approvals"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <button type="button" class="btn btn-primary" id="submit" onclick="Update_Local();">Update</button>
+        </div>
+
+    </div>
+
+    <div class="container msg-db" id="local_form">
+        <h2>Foundation Courses and Degrees</h2>
+
+        <form>
+
+            <label>Degree/Foundation</label>
+            <select id="type" class="form-control" name="type">
+                <option value="" selected="Selected"></option>
+                <option value="Local Degree">Local Degree</option>
+                <option value="Foreign Degree">Foreign Degree</option>
+                <option value="Foundation Programme">Foundation Programme</option>
+            </select>
+            <br>
+
+            <!--Local degree form-->
+            <div id="Local Degree" style="display:none">
+
+                <div class="row">
+                    <div class="col">
+                        <label>Degree Code</label>
+                        <input type="text" class="form-control" placeholder="#IT789" id="degree_code">
+                    </div>
+                    <div class="col">
+                        <label>Degree Title</label>
+                        <input type="text" class="form-control" placeholder="BSc (Hons) in Information Technology - Information Technology" id="degree_title">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Faculty</label>
+                        <select id="faculty" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="Computing">Computing</option>
+                            <option value="Business">Business</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Humanities and Sciences">Humanities and Sciences</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Duration</label>
+                        <select id="duration" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Intake</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="entry" id="entry" value="February">
+                        <label class="form-check-label">February</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="entry" id="entry" value="June">
+                        <label class="form-check-label">June</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="entry" id="entry" value="September">
+                        <label class="form-check-label">September</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Malabe">
+                        <label class="form-check-label">Malabe</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Colpetty">
+                        <label class="form-check-label">Colpetty</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Matara">
+                        <label class="form-check-label">Matara</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Kandy">
+                        <label class="form-check-label">Kandy</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Jaffna">
+                        <label class="form-check-label">Jaffna</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Kurunagala">
+                        <label class="form-check-label">Kurunagala</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Approvals/Recognitions/Memberships</label><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="arm" value="Approved by the University Grants Commission">
+                        <label class="form-check-label">Approved by the University Grants Commission</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="arm" value="Accreted by Institute of Engineers & Technology, UK">
+                        <label class="form-check-label">Accreted by Institute of Engineers & Technology, UK</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="arm" value="Member of the International Association of Universities">
+                        <label class="form-check-label">Member of the International Association of Universities</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="arm" value="Member of the Association of Commonwealth Universities">
+                        <label class="form-check-label">Member of the Association of Commonwealth Universities</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Category</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Technology</label>
+                        <select id="cat1" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Analytical/Logical</label>
+                        <select id="cat2" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Mathematical</label>
+                        <select id="cat3" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Creativity</label>
+                        <select id="cat4" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Management</label>
+                        <select id="cat5" class="form-control">
+                            <option value="" selected="Selected"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Description</label>
+                        <textarea id="descriptions" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!--foreign degree form-->
+            <div id="Foreign Degree" style="display: none">
+
+                <div class="form-group">
+
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Degree Code</label>
+                                <input type="text" class="form-control" placeholder="#FIT1001" id="foreign_degree_code">
+                            </div>
+                            <div class="col">
+                                <label>Degree Title</label>
+                                <input type="text" class="form-control" placeholder="Bachelor of Information Technology" id="foreign_degree_title">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>University </label>
+                                <input type="text" class="form-control" placeholder="Curtin University" id="uni">
+                            </div>
+                            <div class="col">
+                                <label>Country</label>
+                                <select id="country" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="England">England</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="USA">USA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                     <div class="row">
+                         <div class="col">
+                             <label>Faculty</label>
+                             <select id="fac" class="form-control">
+                                 <option value="" selected="Selected"></option>
+                                 <option value="Computing">Computing</option>
+                                 <option value="Business">Business</option>
+                                 <option value="Engineering">Engineering</option>
+                                 <option value="Hospitality">Hospitality</option>
+                             </select>
+                         </div>
+                         <div class="col">
+                             <label>Duration</label>
+                             <select id="dur" class="form-control">
+                                 <option value="" selected="Selected"></option>
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                             </select>
+                         </div>
+                     </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Intake</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="entry" id="entry" value="February">
+                            <label class="form-check-label">February</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="entry" id="entry" value="June">
+                            <label class="form-check-label">June</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="entry" id="entry" value="September">
+                            <label class="form-check-label">September</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Malabe">
+                            <label class="form-check-label">Malabe</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Colpetty">
+                            <label class="form-check-label">Colpetty</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Matara">
+                            <label class="form-check-label">Matara</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Kandy">
+                            <label class="form-check-label">Kandy</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Jaffna">
+                            <label class="form-check-label">Jaffna</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Kurunagala">
+                            <label class="form-check-label">Kurunagala</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Approvals/Recognitions/Memberships</label><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="arm" value="Recognized by the University Grants Commission">
+                            <label class="form-check-label">Recognized by the University Grants Commission</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="arm" value="Recognized by the Australian Computer Society">
+                            <label class="form-check-label">Recognized by the Australian Computer Society</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="arm" value="Member of the International Association of Universities">
+                            <label class="form-check-label">Member of the International Association of Universities</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="arm" value="Member of the Association of Commonwealth Universities">
+                            <label class="form-check-label">Member of the Association of Commonwealth Universities</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+                            <textarea id="desc" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--Foundation Courses' Form-->
+            <div id="Foundation Programme" style="display: none">
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Course Code</label>
+                                <input type="text" class="form-control" placeholder="#ITF12" id="course_code"/>
+                            </div>
+                            <div class="col">
+                                <label>Course Title</label>
+                                <input type="text" class="form-control" placeholder="Foundation Certificate in Information Technology" id="course_title"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>University </label>
+                                <input type="text" id="uni_f" placeholder="Curtin University" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label>Country</label>
+                                <select id="country_f" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="England">England</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="USA">USA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Faculty</label>
+                                <select id="faculty_f" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Computing">Computing</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Hospitality">Hospitality</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>Duration</label>
+                                <select id="duration_f" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Intake</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="entry" id="entry" value="January">
+                            <label class="form-check-label">January</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="entry" id="entry" value="June">
+                            <label class="form-check-label">June</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Malabe">
+                            <label class="form-check-label">Malabe</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="locations" id="locations" value="Colpetty">
+                            <label class="form-check-label">Colpetty</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+                            <textarea id="des" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="button" class="btn btn-primary" value="Next" onclick="entry_career();" />
+
+        </form>
+
+    </div>
+
+
+    <!--Dakshika Part-->
+
+    <div class="container msg-db"id="career_form">
+        <h2>Degree Requirements And Career Opportunities</h2>
+
+        <div class="container">
+            <form id="myForm">
+
+                <h5>Educational Requirements</h5>
+                <label>Ordinary Level<input type="checkbox" id="edu_rq" class="form-control" value="ordinary level" onclick="Olevel()"></label>
+
+                <div id="OL" style="display: none">
+                    <label>Minimum Passes Required<select id="minimum" name="min" class="form-control">
+                        <option value="" selected="Selected"></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select></label><br>
+
+                    <label><h6>Compulsory Subjects</h6></label><br>
+
+                    <label>English <select id="english" class="form-control" name="english">
+                        <option value="" selected="Selected"></option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="S">S</option>
+                        <option value="NA">N/A</option>
+                    </select></label><br>
+                    <label>Maths<select id="mathematics" class="form-control" name="maths"><option value="" selected="Selected"></option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="S">S</option>
+                        <option value="NA">N/A</option>
+                    </select></label>
+
+                </div>
+
+                <label>Advanced Level<input type="checkbox" id="myCheck" class="form-control" value="advanced level" onclick="Alevel()"></label>
+                <div id="AL" style="display: none" onclick="checked()">
+
+                    <label>Stream
+                    <select id="stream" name="stream" class="form-control">
+                        <option value="" selected="Selected"></option>
+                        <option value="Maths" >Maths</option>
+                        <option value="Bio Science" >Bio Science</option>
+                        <option value="Commerce" >Commerce</option>
+                        <option value="Other Stream">Other Stream</option>
+                        <option value="Any Stream">Any Stream</option>
+                    </select></label><br>
+
+                    <label>Minimum Passes Required<select id="passes"class="form-control">
+                        <option value="" selected="Selected"></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select></label><br>
+
+                    <div id="Maths" style="display: none">
+                        <label><h6>Compulsory Subjects</h6></label><br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Subject</label>
+                            </div>
+                            <div class="col">
+                                <label>Grade</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Bio Science" style="display: none">
+                        <label><h6>Compulsory Subjects</h6></label><br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Subject</label>
+                            </div>
+                            <div class="col">
+                                <label>Grade</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Commerce" style="display: none">
+                        <label><h6>Compulsory Subjects</h6></label><br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Subject</label>
+                            </div>
+                            <div class="col">
+                                <label>Grade</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Business Statistics">Business Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Business Statistics">Business Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Business Statistics">Business Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Other Stream" style="display: none">
+                        <label><h6>Compulsory Subjects</h6></label><br>
+                        <div class="row">
+                            <div class="col">
+                                <label>Subject</label>
+                            </div>
+                            <div class="col">
+                                <label>Grade</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Bio Resource Technology">Bio Resource Technology</option>
+                                    <option value="Bio Systems Technology">Bio Systems Technology</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Electrical, Electronic and Information Technology">Electrical, Electronic and Information Technology</option>
+                                    <option value="Engineering Technology">Engineering Technology</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Logic">Logic</option>
+                                    <option value="Mechanical Technology">Mechanical Technology</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Statistics">Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res1" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Bio Resource Technology">Bio Resource Technology</option>
+                                    <option value="Bio Systems Technology">Bio Systems Technology</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Electrical, Electronic and Information Technology">Electrical, Electronic and Information Technology</option>
+                                    <option value="Engineering Technology">Engineering Technology</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Logic">Logic</option>
+                                    <option value="Mechanical Technology">Mechanical Technology</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Statistics">Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res2" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select id="subj3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Bio Resource Technology">Bio Resource Technology</option>
+                                    <option value="Bio Systems Technology">Bio Systems Technology</option>
+                                    <option value="Business Studies">Business Studies</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Combined Maths">Combined Maths</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Electrical, Electronic and Information Technology">Electrical, Electronic and Information Technology</option>
+                                    <option value="Engineering Technology">Engineering Technology</option>
+                                    <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                    <option value="Logic">Logic</option>
+                                    <option value="Mechanical Technology">Mechanical Technology</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Statistics">Statistics</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="res3" class="form-control">
+                                    <option value="" selected="Selected"></option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="S">S</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <br>
+                <h5>Career Opportunities</h5>
+
+                <div class="form2">
+                    <form name="myForm" id="myForm">
+                        <input type="text" id="career_paths1" >
+                        <input type="text" id="career_paths2">
+                        <input type="text" id="career_paths3">
+                        <input type="button" id="Add" value="+"><br>
+                    </form> `
+                </div>
+
+                <div class="form-group">
+                    <br><input type="button" class="btn btn-primary" value="Save" onclick="save_LocalDegree();">
+                    <input type="button" class="btn btn-primary" value="Update" onclick="update_LocalDegree();">
+                    <input type="button" class="btn btn-primary" value="Delete" onclick="delete_LocalDegree();">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="DegreeManagement.js"></script>
+
+</body>
+</html>

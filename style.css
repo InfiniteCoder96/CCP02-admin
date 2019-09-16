@@ -1,0 +1,257 @@
+body{
+background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(blue.jpg);
+background-size: cover;
+background-position: center;
+font-family: 'Nunito', sans-serif;
+height: 100vh;
+}
+input, button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+}
+.topic{
+font-family: 'Nunito',"Courier New";
+text-align: center;
+color: white;
+padding: 1% 0 0;
+}
+.log{
+width:360px;
+padding: 5% 0 0;
+margin: auto;
+}
+.main-div{
+position: relative;
+z-index: 1;
+background: rgba(7,40,195,0.8);
+max-width: 360px;
+margin: 0 auto;
+padding: 45px;
+text-align: center;
+}
+.main-div input{
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    padding: 15px;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+}
+.main-div button {
+    background: #5d8ffc;
+    color: #fff;
+    border: 1px solid #5d8ffc;
+    border-radius: 5px;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+}
+.main-div button:hover, .loggedin-div button:hover, .button1:hover, .button2:hover, .button3:hover, .button4:hover {
+    background: #fff;
+    color: #5d8ffc;
+    border: 1px solid #5d8ffc;
+    cursor: pointer;
+}
+.nav-bar{
+position: fixed;
+top: 0;
+left: 0;
+width:240px;
+height:100%;
+background: #5d8ffc;
+border-right:2px solid blue;
+box-shadow: 0 0 10px 5px rgba(0,0,0,0.25);
+}
+.nav-bar-link{
+    display: flex;
+    align-items: center;
+    background: #5d8ffc;
+    color:white;
+    padding: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    border-bottom:1px solid blue;
+}
+.hover:hover{
+
+    background-color: RoyalBlue;
+
+}
+.admin{
+    padding: 30px;
+
+}
+h1{
+    text-align: center;
+}
+.table{
+text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom:auto;
+
+}
+.button1{
+
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 2px solid #04a;
+    border-radius: 10px;
+    background-color: #06c;
+
+}
+
+.button2{
+
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 2px solid #04a;
+    border-radius: 10px;
+    background-color: #06c;
+    background: url("degs.jpg");
+
+}
+.button3{
+
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 2px solid #04a;
+    border-radius: 10px;
+    background-color: #06c;
+
+
+}
+.button4{
+
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 2px solid #04a;
+    border-radius: 10px;
+    background-color: #06c;
+
+}
+.button5{
+
+    display: block;
+    width: 250px;
+    height: 300px;
+    border: 2px solid #04a;
+    border-radius: 10px;
+    background-color: #06c;
+
+}
+.button1 .content1 {
+    display: block;
+    bottom: 10px;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #09f;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #06c;
+    border-radius: 5px;
+    transition: all 0.1s linear;
+}
+.button2 .content2 {
+    display: block;
+    bottom: 6px;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #09f;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #06c;
+    border-radius: 5px;
+    transition:all 0.1s linear;
+}
+.button3 .content3{
+
+    display: block;
+    bottom: 6px;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #09f;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #06c;
+    border-radius: 5px;
+    transition:all 0.1s linear;
+
+}
+.button4 .content4{
+
+    display: block;
+    bottom: 6px;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #09f;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #06c;
+    border-radius: 5px;
+    transition:all 0.1s linear;
+
+
+
+}
+.button5 .content5{
+
+    display: block;
+    bottom: 6px;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    background-color: #09f;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #06c;
+    border-radius: 5px;
+    transition:all 0.1s linear;
+
+
+
+}
+.button1:active .content1 {
+    bottom: 0;
+    box-shadow: 0 0 0 #06c;
+}
+.button2:active .content2 {
+    bottom: 0;
+    box-shadow: 0 0 0 #06c;
+}
+.button3:active .content3 {
+    bottom: 0;
+    box-shadow: 0 0 0 #06c;
+}
+.button4:active .content4 {
+    bottom: 0;
+    box-shadow: 0 0 0 #06c;
+}
+.msg-db{
+    background: white;
+
+}

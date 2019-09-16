@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <link rel="stylesheet" href="/assets/dcode.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="short icon" href="/assets/favicon.ico">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/1a81673399.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src='main.js'></script>
+
+<body  onload="onLoad();">
+
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout-icon"></div>
+
+        <h4 style="text-align: center">Inquiries</h4>
+
+    </header>
+    <div class="container msg-db">
+        <input type="text" id="selectedId" value="">
+        <table id="inq_list" class="table table-hover">
+
+        </table>
+
+    </div>
+    <div class="mdl-layout__drawer">
+        <div class="nav-bar">
+
+            <div class="admin">
+                <span class="material-icons" style="font-size: 400%">person_pin</span><br>ADMIN</br>
+            </div>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">home</span>Home
+            </a>
+
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">account_circle</span>Manage Students
+
+            </a>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">school</span>Local Degree Programs
+            </a>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">school</span>Foreign Degree Programs
+            </a>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">event_note</span>Notices
+            </a>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">notifications</span>Adverticements
+            </a>
+            <a href="#" class="nav-bar-link">
+                <span class="material-icons">exit_to_app</span>Logout
+            </a>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

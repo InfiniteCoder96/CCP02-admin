@@ -1,0 +1,197 @@
+<html>
+<head>
+ <title>S2Guide - Degree Notices</title>
+ <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+ <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+ <link rel="stylesheet" href="/assets/dcode.css">
+ <link rel="short icon" href="/assets/favicon.ico">
+
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+ <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+ <script src="index.js"></script>
+ <link rel="stylesheet" href="style.css">
+<script>
+var firebaseConfig = {
+    apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+    authDomain: "s2guide.firebaseapp.com",
+    databaseURL: "https://s2guide.firebaseio.com",
+    projectId: "s2guide",
+    storageBucket: "s2guide.appspot.com",
+    messagingSenderId: "457852779269",
+    appId: "1:457852779269:web:7e27f12f4d807544"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="dbHandler_Quiz_Option1.js"> </script>
+
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout">
+ <header class="mdl-layout__header">
+  <div class="mdl-layout-icon"></div>
+
+  <h4 style="text-align: center">Quiz Option</h4>
+
+ </header>
+ <div class="container msg-db">
+
+  <h1>Create Quiz for After A/L students</h1>
+
+  <h3> Add new question </h3>
+  <table class="table table-hover">
+   <tr>
+    <td>Question ID: </td>
+    <td><input type="text" name="q_id" id="q_id" /></td>
+   </tr>
+   <tr>
+    <td>Question: </td>
+    <td><textarea rows="4" cols="50" name="q_topic" id="q_topic"></textarea></td>
+   </tr>
+   <tr>
+    <td>Answer1: </td>
+    <td><input type="text" name="q_ans1" id="q_ans1" /></td>
+   </tr>
+   <tr>
+    <td>Answer2: </td>
+    <td><input type="text" name="q_ans2" id="q_ans2" /></td>
+   </tr>
+   <tr>
+    <td>Answer3: </td>
+    <td><input type="text" name="q_ans3" id="q_ans3" /></td>
+   </tr>
+   <tr>
+    <td>Answer4: </td>
+    <td><input type="text" name="q_ans4" id="q_ans4" /></td>
+   </tr>
+   <tr>
+    <td colspan="2">
+     <input type="button" value="Save" onclick="save_n();" />
+     <input type="button" value="Edit" onclick="update_n();" />
+     <input type="button" value="Delete" onclick="delete_n();" />
+    </td>
+   </tr>
+  </table>
+
+  <h3>Questions and Answers</h3>
+
+  <table id="tbl_q_list" class="table table-hover">
+   <tr>
+    <td><b>#ID</b></td>
+    <td><b>Question</b></td>
+    <td><b>Answer1</b></td>
+    <td><b>Answer2</b></td>
+    <td><b>Answer3</b></td>
+    <td><b>Answer4</b></td>
+   </tr>
+  </table>
+
+ </div>
+
+ <div class="mdl-layout__drawer">
+  <div class="nav-bar">
+
+   <div class="admin">
+    <span class="material-icons" style="font-size: 400%">person_pin</span><br>ADMIN</br>
+   </div>
+   <a href="Dashboard.html" class="nav-bar-link">
+    <span class="material-icons">home</span>Home
+   </a>
+
+   <a href="" class="nav-bar-link">
+    <span class="material-icons">account_circle</span>Manage Students
+
+   </a>
+   <a href="quizOption1.html" class="nav-bar-link">
+    <span class="material-icons">account_circle</span>Quiz
+
+   </a>
+   <a href="DegreeManagement.html" class="nav-bar-link">
+    <span class="material-icons">school</span>Degree Management
+   </a>
+
+   <a href="add_notice.html" class="nav-bar-link">
+    <span class="material-icons">event_note</span>Notices
+   </a>
+   <a href="admin.html" class="nav-bar-link">
+    <span class="material-icons">notifications</span>Adverticements
+   </a>
+
+   <a href="#" class="nav-bar-link"onclick="logout();">
+
+    <span class="material-icons" >exit_to_app</span>Logout
+
+   </a>
+
+
+  </div>
+ </div>
+</div>
+
+
+
+
+ <script>
+ 
+ var rIndex, tblQ = document.getElementById('tbl_q_list');
+       function selectedRowToInput()
+            {
+                
+                for(var i = 1; i < tblQ.rows.length; i++)
+                {
+                    tblQ.rows[i].onclick = function()
+                    {
+                      // get the selected row index
+                      rIndex = this.rowIndex;
+                      document.getElementById("q_id").value = this.cells[0].innerHTML;
+                      document.getElementById("q_topic").value = this.cells[1].innerHTML;
+                      document.getElementById("q_ans1").value = this.cells[2].innerHTML;
+                      document.getElementById("q_ans2").value = this.cells[3].innerHTML;
+                      document.getElementById("q_ans3").value = this.cells[4].innerHTML;
+                      document.getElementById("q_ans4").value = this.cells[5].innerHTML;
+                    };
+                }
+            }
+            
+  var databaseRef = firebase.database().ref('quiz/');
+  var rowIndex = 1;
+ 
+  databaseRef.once('value', function(snapshot) {
+   snapshot.forEach(function(childSnapshot) {
+   var childKey = childSnapshot.key;
+   var childData = childSnapshot.val();
+   var row = tblQ.insertRow(rowIndex);
+   var cellId = row.insertCell(0);
+   var cellQTopic = row.insertCell(1);
+   var cellAnswer1 = row.insertCell(2);
+   var cellAnswer2= row.insertCell(3);
+   var cellAnswer3= row.insertCell(4);
+   var cellAnswer4= row.insertCell(5);
+   var cellDelete = row.insertCell(6);
+
+
+   cellId.appendChild(document.createTextNode(childKey));
+   cellQTopic.appendChild(document.createTextNode(childData.q_topic));
+   cellAnswer1.appendChild(document.createTextNode(childData.q_ans1));
+   cellAnswer2.appendChild(document.createTextNode(childData.q_ans2));
+   cellAnswer3.appendChild(document.createTextNode(childData.q_ans3));
+   cellAnswer4.appendChild(document.createTextNode(childData.q_ans4));
+   
+   
+   cellDelete.outerHTML =  "<tr id='row"+rowIndex+"'><td><input type='button' value='Select' class='delete' onclick='selectedRowToInput()'></td></tr>"; 
+   rowIndex = rowIndex + 1;
+    });
+  });
+  </script>
+
+</body>
+
+</html>

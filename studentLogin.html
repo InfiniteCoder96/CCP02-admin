@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>student login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+    <link rel="stylesheet" href="student.css">
+
+    <script src="students.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <h1 class="brand"><span>Welcome To SLIIT </span> Login Page</h1>
+    <div class="wrapper ">
+        <div class="company-info">
+            <h3>Contact Us</h3>
+            <ul>
+                <li><i class="fa fa-road"></i>Address - NEW KANDY ROAD, MALABE </li>
+                <li><i class="fa fa-phone"></i> Phone - +94 11 754 4801</li>
+                <li><i class="fa fa-envelope"></i> Email - INFO@SLIIT.LK</li>
+            </ul>
+        </div>
+
+        <div class="contact">
+
+
+            <button id="btnGmail" onclick="login()" style="color: red; ">Gmail</button>
+
+            <p class="full">
+            <button id="btnFb" style="color: #0066cc">Face Book</button>
+            </p>
+            <a href="https://www.gmail.com">Create a Gmail Account</a>
+
+        </div>
+
+
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+        authDomain: "s2guide.firebaseapp.com",
+        databaseURL: "https://s2guide.firebaseio.com",
+        projectId: "s2guide",
+        storageBucket: "s2guide.appspot.com",
+        messagingSenderId: "457852779269",
+        appId: "1:457852779269:web:7e27f12f4d807544"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    login=()=> {
+
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+
+            console.log(result);
+            console.log("Successful");
+            window.open("Dashboard.html");
+            // ...
+        }).catch(function(error) {
+
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        })
+    }
+</script>
+<script src="students.js"></script>
+</body>
+
+</html>

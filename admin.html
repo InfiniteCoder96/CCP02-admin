@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/html">
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+<header class="mdl-layout__header">
+  <div class="mdl-layout-icon"></div>
+
+  <h4 style="text-align: center;margin-top: 20px">Add Advertisement</h4>
+
+</header>
+
+<head>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="/assets/dcode.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="short icon" href="/assets/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <script src="https://kit.fontawesome.com/1a81673399.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <script src="index.js"></script>
+
+</head>
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body, html {
+
+  height: 100%;
+
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+
+.image {
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://static.sliit.lk/wp-content/uploads/2018/03/SLIIT-malabe.jpg");
+
+  height: 50%;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-size: cover;
+
+  position: relative;
+
+}
+
+
+
+.text {
+
+  text-align: center;
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: white;
+
+}
+
+
+
+.text button {
+
+  border: none;
+
+  outline: 0;
+
+  display: inline-block;
+
+  padding: 10px 25px;
+
+  color: black;
+
+  background-color: #ddd;
+
+  text-align: center;
+
+  cursor: pointer;
+
+}
+
+
+
+.text button:hover {
+
+  background-color: #555;
+
+  color: white;
+
+}
+
+.delete button
+
+{
+
+  border: none;
+
+  outline: 0;
+
+  display: inline-block;
+
+  padding: 10px 25px;
+
+  color: black;
+
+  background-color: #ddd;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  position: absolute;
+
+}
+
+
+
+.delete button:hover{
+
+background-color: #555;
+
+color: white;
+
+}
+
+#custom-text{
+    color: white;
+}
+
+  #gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #gallery > a > img{
+    height: 50px;
+    width: 100px;
+    margin: 5px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #5d8ffc;
+    border-radius: 3px;
+  }
+
+</style>
+
+
+
+<script type="text/javascript">
+
+function readURL(input) {
+
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+
+
+            reader.onload = function (e) {
+
+                $('#preview')
+
+                    .attr('src', e.target.result)
+
+                    .width(150)
+
+                    .height(200);
+
+            };
+
+
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+
+    }
+
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+<div class="container" style="margin-top: 20px;margin-bottom: 20px">
+  <div class="row">
+    <div class="col-md-6" style="border-color: white;border-width: 20px" id="gallery">
+
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <img src="no_image_png.png" class="d-block w-100" alt="..." id="preview" style="min-height:400px;min-width:100%;max-height: 400px;max-width: 100%">
+        </div>
+
+      </div>
+      <div class="row" style="margin-top: 10px">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="file" name="fileToUpload" id="realBtn" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png" hidden>
+              <button class="btn btn-primary" id="custom-btn">Choose File</button>
+              <span id="custom-text">No files chosen, yet</span>
+            </div>
+          </div>
+          <div class="row" id="upload" style="margin-top: 10px">
+            <div class="col-md-8">
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated text-white" role="progressbar" id="upload-progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-success btn-block" id="custom-upload-btn">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+    authDomain: "s2guide.firebaseapp.com",
+    databaseURL: "https://s2guide.firebaseio.com",
+    projectId: "s2guide",
+    storageBucket: "s2guide.appspot.com",
+    messagingSenderId: "457852779269",
+    appId: "1:457852779269:web:7e27f12f4d807544"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script type="text/javascript">
+  const realFileBtn = document.getElementById("realBtn");
+  const customBtn = document.getElementById("custom-btn");
+  const customTxt = document.getElementById("custom-text");
+  const uploadBtn = document.getElementById("custom-upload-btn");
+  const upload = document.getElementById("upload");
+  const caption = document.getElementById("image-caption");
+  const gallery = document.getElementById("gallery");
+  const progressBar = document.getElementById("upload-progress");
+
+  let selectedFile;
+  let dbRef = firebase.database().ref("Advertisements/");
+
+  (function() {
+    upload.hidden = true;
+    dbRef.on("child_added", function (snapshot) {
+      let url = snapshot.val();
+      gallery.innerHTML += `<a href="${url}"><img src="${url}" alt="..."></a>`;
+    });
+  })();
+
+  customBtn.addEventListener("click", function(){
+    realFileBtn.click();
+  });
+
+  realFileBtn.addEventListener("change", function (e) {
+    if(realFileBtn.value){
+      customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+      upload.hidden = false;
+      selectedFile = e.target.files[0];
+    }
+  });
+
+  uploadBtn.addEventListener("click", function () {
+    uploadImage();
+  });
+
+  function largeURL(snapshot){
+    let url = snapshot.downloadURL;
+
+    let updates = {};
+    let postData = {
+      url:url,
+      caption:caption.value
+    };
+    updates['/Advertisements/' + postKey] = postData;
+    firebase.database().ref().update(updates);
+
+    function renderImage(snap){
+      let url = snap.val();
+    }
+    firebase.database().ref("Advertisements/").on("child_added", renderImage);
+  }
+
+
+  function uploadImage() {
+
+    let filename = selectedFile.name;
+    let storageRef = firebase.storage().ref('/advertisements/' + filename);
+    let uploadTask = storageRef.put(selectedFile);
+
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on('state_changed', function(snapshot){
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      progressBar.style.width = progress + "%";
+      progressBar.innerHTML = Math.round(progress) + "%";
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          console.log('Upload is running');
+          break;
+      }
+    }, function(error) {
+      // Handle unsuccessful uploads
+    }, function() {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log('File available at', downloadURL);
+        dbRef.push(downloadURL);
+
+      });
+
+
+
+
+    });
+
+  }
+  
+</script>
+
+</body>
+
+
+</html>
+  <div class="mdl-layout__drawer">
+    <div class="nav-bar">
+
+      <div class="admin">
+        <span class="material-icons" style="font-size: 400%">person_pin</span><br>ADMIN</br>
+      </div>
+      <a href="Dashboard.html" class="nav-bar-link">
+        <span class="material-icons">home</span>Home
+      </a>
+
+      <a href="" class="nav-bar-link">
+        <span class="material-icons">account_circle</span>Manage Students
+
+      </a>
+      <a href="quizOption1.html" class="nav-bar-link">
+        <span class="material-icons">account_circle</span>Quiz
+
+      </a>
+      <a href="DegreeManagement.html" class="nav-bar-link">
+        <span class="material-icons">school</span>Degree Management
+      </a>
+
+      <a href="add_notice.html" class="nav-bar-link">
+        <span class="material-icons">event_note</span>Notices
+      </a>
+      <a href="admin.html" class="nav-bar-link">
+        <span class="material-icons">notifications</span>Adverticements
+      </a>
+
+      <a href="index.html" class="nav-bar-link"onclick="logout();">
+
+        <span class="material-icons" >exit_to_app</span>Logout
+
+      </a>
+
+    </div>
+  </div>
+
+
+
+</div>
+</body>
+
+</html>
+
+

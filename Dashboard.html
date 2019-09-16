@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+    <link rel="stylesheet" href="/assets/dcode.css">
+    <link rel="short icon" href="/assets/favicon.ico">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <a href="index.html"></a>
+
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout-icon"></div>
+
+            <h4 style="text-align: center">Admin Login</h4>
+
+    </header>
+
+    <div class="table"align="centre">
+        <table cellspacing="20">
+
+                <th>
+                <a href="DegreeManagement.html" class="button1">
+                    <span class="content1">Degree Management<br> <img src="degree.png" width="160px" height="170px"></span>
+               </a>
+
+                </th>
+
+            <br>
+                <td>
+                    <a href="inquery_list.html" class="button4">
+                        <span class="content4">Inquiry<br><img src="inq.png" width="160px" height="170px"></span>
+
+                    </a>
+                </td>
+            <br>
+            <td>
+                <a href="#" class="button5">
+                    <span class="content5">View Student Results<br><img src="res.png" width="160px" height="170px"></span>
+
+                </a>
+            </td>
+        </table>
+
+    </div>
+
+    <div class="mdl-layout__drawer">
+    <div class="nav-bar">
+
+        <div class="admin">
+            <span class="material-icons" style="font-size: 400%">person_pin</span><br>ADMIN</br>
+        </div>
+        <a href="Dashboard.html" class="nav-bar-link">
+            <span class="material-icons">home</span>Home
+        </a>
+
+        <a href="" class="nav-bar-link">
+            <span class="material-icons">account_circle</span>Manage Students
+
+        </a>
+        <a href="quizOption1.html" class="nav-bar-link">
+            <span class="material-icons">account_circle</span>Quiz
+
+        </a>
+        <a href="DegreeManagement.html" class="nav-bar-link">
+            <span class="material-icons">school</span>Degree Management
+        </a>
+
+        <a href="add_notice.html" class="nav-bar-link">
+            <span class="material-icons">event_note</span>Notices
+        </a>
+        <a href="admin.html" class="nav-bar-link">
+            <span class="material-icons">notifications</span>Adverticements
+        </a>
+
+        <a href="#" class="nav-bar-link"onclick="logout();">
+
+            <span class="material-icons" >exit_to_app</span>Logout
+
+        </a>
+
+</div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+        authDomain: "s2guide.firebaseapp.com",
+        databaseURL: "https://s2guide.firebaseio.com",
+        projectId: "s2guide",
+        storageBucket: "s2guide.appspot.com",
+        messagingSenderId: "457852779269",
+        appId: "1:457852779269:web:7e27f12f4d807544"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+<script src="index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <a href="Dashboard.html"></a>
+</head>
+
+<body>
+<div class="topic">
+
+    <h1>Welcome To SLIIT Admin Page</h1>
+</div>
+
+<div id="login_div" >
+<div class="log">
+    <div class="main-div">
+        <h3 style="font-size: 30px">AdminLogin</h3><br>
+        <input type="email" placeholder="Email" id="email_field" />
+
+        <input type="password" placeholder="Password" id="password_field" />
+
+        <button onclick="login()">Login to Account</button>
+    </div>
+</div>
+</div>
+<div id="user_div" hidden>
+    <div class="loggedin-div">
+        <h3>Welcome User</h3>
+        <p id="user_para">logged in.</p>
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDPkSmKr-2T6C0_1SFwjWeRFlCzzL5VXc0",
+        authDomain: "s2guide.firebaseapp.com",
+        databaseURL: "https://s2guide.firebaseio.com",
+        projectId: "s2guide",
+        storageBucket: "s2guide.appspot.com",
+        messagingSenderId: "457852779269",
+        appId: "1:457852779269:web:7e27f12f4d807544"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+<script src="index.js"></script>
+</body>
+</html>
